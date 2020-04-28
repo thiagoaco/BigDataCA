@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="description" content="">
+        <meta name="Thiago" content="Thiago">
+        <link href="/assets/bootstrap.min.css" rel="stylesheet">
+        <link href="/assets/fhgstyles.css" rel="stylesheet">        
+        
+        <title>Flat Head Motor Garage</title>
+        <!--is is the web site icon, the code was foud on you tube  -->
+        <link rel="icon" type="image/png"href="/ass/mechanic.png">
+
+    </head>
+
+    <body>
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    
+            <div class="container">	<a class="navbar-brand" href="#">FlatHead Garage</a>
+            <link rel="shortcut icon" type="image/png"src="/ass/mechanic.png">	
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">	<span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                    <!--is is the web site links, the code was foud on w3schools  -->
+                        <li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
+                        <li class="nav-item"><a class="nav-link" href="/links/about.html">About</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/links/services.html">Services</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/links/carpics.html">Car pics</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- page contend where the user goint to insert and delete all the items -->
+      <div class="container">
+    
+		<div class="row">
+			<div class="col-lg-12 text-center">
+         <h1 class="display-4 mb-3">Flat Head Motor Garage</h1>
+                <div class="d-flex">
+                <button class="btn btn-primary mr-4" id="getText">Update</button>
+                <button class="btn btn-success mr-4" id="getServices">Service list</button>
+                
+                </div>
+
+                 <div id="output"></div>
+                        <form id="addPost">
+                            <div class="form-group">
+                                <input type="text" id="mechanic" class="form-control" placeholder="mechanic">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="parts" class="form-control" placeholder="parts">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" id="price" class="form-control" placeholder="price">
+                            </div>
+                        <input type="submit" class="btn btn-secondary" value="Submit">
+                        </form>
+                        </div>
+                      
+                        <form id="del">
+                       
+                            <div class="form-group">
+                                <input type="text" id="id" class="form-control" placeholder="id">
+                            </div>
+                        <button class="btn btn-danger mr-4" id="del">delete</button>
+                        </form>
+                        </div>
+            <script>
+               document.getElementById('getServices').addEventListener('click', getServices);
+                document.getElementById('addPost').addEventListener('submit', addPost);
+                document.getElementById('del').addEventListener('del', del);
+
+                function getServices(){
+                fetch('/getServices')
+                .then((res) => res.json())
+                .then((data) => {
+                    let output = '<h2 class="mb-4">services</h2>';
+                    data.forEach(function(services){
+                    output += `
+                        <ul class="list-group mb-3">
+                        <li class="list-group-item">id: ${services._id}</li>
+                        <li class="list-group-item">mechanic: ${services.mechanic}</li>
+                        <li class="list-group-item">parts: ${services.parts}</li>
+                        <li class="list-group-item">Price: $ ${services.price}</li>
+                        </ul>
+                    `;
+                    });
+                    document.getElementById('output').innerHTML = output;
+                })
+                }                
+                function addPost(e){
+                e.preventDefault();
+
+                let mechanic = document.getElementById('mechanic').value;
+                let parts = document.getElementById('parts').value;
+                let price = document.getElementById('price').value;
+
+                fetch('/post', {
+                    method:'POST',
+                    headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        mechanic:mechanic, 
+                        parts:parts,
+                        price:price
+                        })
+                })
+                .then((res) => res.json())
+                .then((data) => console.log(data))
+                }
+                 function del(e){
+                e.preventDefault();
+
+                let id = id.getElementById('id').value;
+          
+
+                fetch('/del', {
+                    method:'DELETE',
+                    headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-type':'application/json'
+                    },
+                    body:JSON.stringify({
+                        _id:id, 
+                        
+                        })
+                })
+                .then((res) => res.json(id))
+                .then((data) => console.log(data))
+                }
+
+            </script>   
+            <script src="/jjqq/jquery.min.js"></script>
+            <script src="/jjqq/table.js"></script>
+            <script src="/assets/bootstrap.min.js"></script>
+          
+		</div>
+	</div>  
+      </div>
+            <footer class="footer">
+            	<span class="text-left">&copy;Thiago   2017201    @2020</span>
+           
+            </footer>
+          	</div>
+    </body>
+</html>
