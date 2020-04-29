@@ -7,142 +7,148 @@
         <meta name="description" content="">
         <meta name="Thiago" content="Thiago">
         <link href="/css/bootstrap.min.css" rel="stylesheet">
-        <link href="/css/css.css" rel="stylesheet">        
+        <link href="/css/css.css" rel="stylesheet">
+         <link href="/css/bootstrap.css" rel="stylesheet">        
         
         <title>Top artists</title>
         <!--is is the web site icon, the code was foud on you tube  -->
-        <link rel="icon" type="image/png"href="//mechanic.png">
+       
 
     </head>
 
-    <body>
-        <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-    
-            <div class="container">	<a class="navbar-brand" href="#">FlatHead Garage</a>
-            <link rel="shortcut icon" type="image/png"src="/ass/mechanic.png">	
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">	<span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                    <!--is is the web site links, the code was foud on w3schools  -->
-                        <li class="nav-item active"><a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a></li>
-                     
-                   
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- page contend where the user goint to insert and delete all the items -->
-      <div class="container">
+<body>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <link rel="shortcut icon" type="image/png"href="../img/mechanic.png">
+		<div class="container">	<a class="navbar-brand" href="#">FlatHead Garage</a>
+			
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">	<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item active"><a class="nav-link" href="/links/index.html">Home<span class="sr-only">(current)</span></a></li>
+					<li class="nav-item"><a class="nav-link" href="/links/about.html">About</a></li>
+					<li class="nav-item"><a class="nav-link" href="/links/services.html">Services</a></li>
+					<li class="nav-item"><a class="nav-link" href="/links/carpics.html">Car pics</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+<body>
+	<!-- Navigation -->
+
+	<div class="container">
     
 		<div class="row">
-			<div class="col-lg-12 text-center">
-         <h1 class="display-4 mb-3">Top playlist</h1>
-                <div class="d-flex">
-                <button class="btn btn-primary mr-4" id="getText">Update</button>
-                <button class="btn btn-success mr-4" id="getServices">Service list</button>
-                
-                </div>
-
-                 <div id="output"></div>
-                        <form id="addPost">
-                            <div class="form-group">
-                                <input type="text" id="mechanic" class="form-control" placeholder="mechanic">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="parts" class="form-control" placeholder="parts">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" id="price" class="form-control" placeholder="price">
-                            </div>
-                        <input type="submit" class="btn btn-secondary" value="Submit">
-                        </form>
-                        </div>
-                      
-                        <form id="del">
-                       
-                            <div class="form-group">
-                                <input type="text" id="id" class="form-control" placeholder="id">
-                            </div>
-                        <button class="btn btn-danger mr-4" id="del">delete</button>
-                        </form>
-                        </div>
-            <script>
-               document.getElementById('getServices').addEventListener('click', getServices);
-                document.getElementById('addPost').addEventListener('submit', addPost);
-                document.getElementById('del').addEventListener('del', del);
-
-                function getServices(){
-                fetch('/getServices')
-                .then((res) => res.json())
-                .then((data) => {
-                    let output = '<h2 class="mb-4">services</h2>';
-                    data.forEach(function(services){
-                    output += `
-                        <ul class="list-group mb-3">
-                        <li class="list-group-item">id: ${services._id}</li>
-                        <li class="list-group-item">mechanic: ${services.mechanic}</li>
-                        <li class="list-group-item">parts: ${services.parts}</li>
-                        <li class="list-group-item">Price: $ ${services.price}</li>
-                        </ul>
-                    `;
-                    });
-                    document.getElementById('output').innerHTML = output;
-                })
-                }                
-                function addPost(e){
-                e.preventDefault();
-
-                let mechanic = document.getElementById('mechanic').value;
-                let parts = document.getElementById('parts').value;
-                let price = document.getElementById('price').value;
-
-                fetch('/post', {
-                    method:'POST',
-                    headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        mechanic:mechanic, 
-                        parts:parts,
-                        price:price
-                        })
-                })
-                .then((res) => res.json())
-                .then((data) => console.log(data))
-                }
-                 function del(e){
-                e.preventDefault();
-
-                let id = id.getElementById('id').value;
-          
-
-                fetch('/del', {
-                    method:'DELETE',
-                    headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-type':'application/json'
-                    },
-                    body:JSON.stringify({
-                        _id:id, 
-                        
-                        })
-                })
-                .then((res) => res.json(id))
-                .then((data) => console.log(data))
-                }
-
-            </script>   
-              
-		</div>
-	</div>  
+        
+        
+  <div class="container">
+    <h1 class="display-4 mb-4">Fetch API Sandbox</h1>
+    <div class="d-flex">
+      <button class="btn btn-primary mr-4" id="getText">Get Text</button>
+      <button class="btn btn-success mr-4" id="getUsers">Get JSON</button>
+      <button class="btn btn-warning mr-4" id="getPosts">Get API DATA</button>
+    </div>
+    <hr>
+    <div id="output"></div>
+    <form id="addPost">
+      <div class="form-group">
+        <input type="text" id="title" class="form-control" placeholder="Title">
       </div>
-            <footer class="footer">
-            	<span class="text-left">&copy;Thiago   2017201    @2020</span>
-           
-            </footer>
-          	</div>
-    </body>
+      <div class="form-group">
+        <textarea id="body" class="form-control" placeholder="Body"></textarea>
+      </div>
+      <input type="submit" class="btn btn-secondary" value="Submit">
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('getText').addEventListener('click', getText);
+    document.getElementById('getUsers').addEventListener('click', getUsers);
+    document.getElementById('getPosts').addEventListener('click', getPosts);
+    document.getElementById('addPost').addEventListener('submit', addPost);
+
+    function getText(){
+      // fetch('sample.txt')
+      // .then(function(res){
+      //   return res.text();
+      // })
+      // .then(function(data){
+      //   console.log(data);
+      // });
+
+      fetch('sample.txt')
+      .then((res) => res.text())
+      .then((data) => {
+        document.getElementById('output').innerHTML = data;
+      })
+      .catch((err) => console.log(err))
+    }
+
+    function getUsers(){
+      fetch('users.json')
+      .then((res) => res.json())
+      .then((data) => {
+        let output = '<h2 class="mb-4">Users</h2>';
+        data.forEach(function(user){
+          output += `
+            <ul class="list-group mb-3">
+              <li class="list-group-item">ID: ${user.id}</li>
+              <li class="list-group-item">Name: ${user.name}</li>
+              <li class="list-group-item">Email: ${user.email}</li>
+            </ul>
+          `;
+        });
+        document.getElementById('output').innerHTML = output;
+      })
+    }
+
+    function getPosts(){
+      fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((res) => res.json())
+      .then((data) => {
+        let output = '<h2 class="mb-4">Posts</h2>';
+        data.forEach(function(post){
+          output += `
+            <div class="card card-body mb-3">
+              <h3>${post.title}</h3>
+              <p>${post.body}</p>
+            </div>
+          `;
+        });
+        document.getElementById('output').innerHTML = output;
+      })
+    }
+
+    function addPost(e){
+      e.preventDefault();
+
+      let title = document.getElementById('title').value;
+      let body = document.getElementById('body').value;
+
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+        method:'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-type':'application/json'
+        },
+        body:JSON.stringify({title:title, body:body})
+      })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+    }
+  </script>
+
+
+			
+		</div>
+	
+	<!-- Bootstrap core JavaScript -->
+	<script src="/js/jquery.min.js"></script>
+	<script src="/jjqq/table.js"></script>
+	<script src="/assets/bootstrap.min.js"></script>
+</body>
+
+	
 </html>

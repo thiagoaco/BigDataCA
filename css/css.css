@@ -4,7 +4,7 @@ html {
 }
 body {
  /* this code gives a background image  */
-    background-image: url(/img/car.jpg);
+  
     background-size: 100%;
     background-repeat: no-repeat;
   /* Margin bottom by footer height */
